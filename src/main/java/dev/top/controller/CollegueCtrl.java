@@ -58,4 +58,24 @@ public class CollegueCtrl {
 		}
 		return currentCollegue;
 	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/nouveau")
+	public Collegue Nouveau(@RequestBody Collegue collegue) {
+		Collegue newCollegue = new Collegue();
+
+		if (collegue.getMatricule() != null && collegue.getPseudo() != null && !collegue.getMatricule().isEmpty()
+				&& collegue.getMatricule() != null && collegue.getPseudo().length() >= 2) {
+			newCollegue.setPseudo(collegue.getPseudo());
+			newCollegue.setMatricule(collegue.getMatricule());
+			newCollegue.setScore(BigDecimal.valueOf(0));
+
+			if (collegue.getImageUrl() == null || collegue.getImageUrl().isEmpty()) {
+				newCollegue.setImageUrl("https://www.bestpersonnel.ie/wp-content/uploads/2017/11/Giada-Minotti.png");
+			} else {
+				newCollegue.setImageUrl(collegue.getImageUrl());
+			}
+			collegueRepo.save(newCollegue);
+		}
+		return newCollegue;
+	}
 }

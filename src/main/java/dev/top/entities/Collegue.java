@@ -15,6 +15,9 @@ public class Collegue {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@Column(name = "matricule")
+	private String matricule;
+
 	@Column(name = "pseudo", nullable = false)
 	private String pseudo;
 
@@ -24,17 +27,22 @@ public class Collegue {
 	@Column(name = "score", nullable = false)
 	private BigDecimal score;
 
-	@Column(name = "nom", nullable = false)
+	@Column(name = "nom")
 	private String nom;
 
-	@Column(name = "prenom", nullable = false)
+	@Column(name = "prenom")
 	private String prenom;
 
-	@Column(name = "adresse", nullable = false)
+	@Column(name = "adresse")
 	private String adresse;
 
 	public Collegue() {
 
+	}
+
+	public Collegue(String matricule, String pseudo) {
+		this.matricule = matricule;
+		this.pseudo = pseudo;
 	}
 
 	public Collegue(String pseudo, BigDecimal score, String nom, String prenom, String adresse, String imageUrl) {
@@ -134,6 +142,21 @@ public class Collegue {
 	 */
 	public void setAdresse(String adresse) {
 		this.adresse = adresse;
+	}
+
+	/**
+	 * @return the matricule
+	 */
+	public String getMatricule() {
+		return matricule;
+	}
+
+	/**
+	 * @param matricule
+	 *            the matricule to set
+	 */
+	public void setMatricule(String matricule) {
+		this.matricule = matricule;
 	}
 
 }

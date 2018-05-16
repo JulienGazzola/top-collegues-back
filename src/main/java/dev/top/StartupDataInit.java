@@ -32,7 +32,7 @@ public class StartupDataInit {
 
 		if (this.collegueRepo.count() <= 0) {
 			this.collegueRepo
-					.save(new Collegue("Jeanluc", BigDecimal.valueOf(-1), "Jean", "Luc", "12 rue toto Totocity",
+					.save(new Collegue("Jeannot", BigDecimal.valueOf(-1), "Jean", "Luc", "12 rue toto Totocity",
 							"http://pluspng.com/img-png/cute-baby-bird-png-cute-baby-clipart-cliparts-co-405.png"));
 			this.collegueRepo
 					.save(new Collegue("Jeannette", BigDecimal.valueOf(1), "Jeanne", "tte", "15 rue tata Tatacity",
