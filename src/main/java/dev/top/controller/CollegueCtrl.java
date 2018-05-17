@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import dev.top.entities.Action;
 import dev.top.entities.Avis;
 import dev.top.entities.Collegue;
+import dev.top.entities.CollegueApi;
 import dev.top.repos.CollegueRepo;
 
 /**
@@ -63,6 +65,10 @@ public class CollegueCtrl {
 	public Collegue Nouveau(@RequestBody Collegue collegue) {
 		Collegue newCollegue = new Collegue();
 
+		CollegueApi[] collegues = new RestTemplate().getForObject(
+				"http://collegues-api.cleverapps.io/collegues?matricule=" + collegue.getMatricule(),
+				CollegueApi[].class);
+
 		if (collegue.getMatricule() != null && collegue.getPseudo() != null && !collegue.getMatricule().isEmpty()
 				&& collegue.getMatricule() != null && collegue.getPseudo().length() >= 2) {
 			newCollegue.setPseudo(collegue.getPseudo());
@@ -70,7 +76,8 @@ public class CollegueCtrl {
 			newCollegue.setScore(BigDecimal.valueOf(0));
 
 			if (collegue.getImageUrl() == null || collegue.getImageUrl().isEmpty()) {
-				newCollegue.setImageUrl("https://www.bestpersonnel.ie/wp-content/uploads/2017/11/Giada-Minotti.png");
+				newCollegue.setImageUrl(
+						"http://pluspng.com/img-png/cute-baby-bird-png-cute-baby-clipart-cliparts-co-405.png");
 			} else {
 				newCollegue.setImageUrl(collegue.getImageUrl());
 			}
@@ -78,4 +85,5 @@ public class CollegueCtrl {
 		}
 		return newCollegue;
 	}
+
 }
